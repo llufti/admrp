@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>AD Serrana</title>
+        <h:outputStylesheet library="css" name="responsivo.css"></h:outputStylesheet>
+        <meta name="viewport" content="width=device-width"  />
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    </h:head>
+    <h:body   >
+        <h:form>
+            <div  class="container"  >
+                <div align="center" class="box">
+                    <p:growl id="growl"  life="2000" />
+                    <p:card  >
+                        <h:panelGrid width="100%" class="gridTituloLogin" columns="1"  >
+                            <p:outputLabel class="lblAssemblia" value="Assembleia de Deus M. Belém" />
+                            <p:outputLabel class="lblAssemblia" value="(Ribeirão Preto)" />
+                            <p:outputLabel class="lblSubTitulo" value=" SubSede Serrana" />
+                            <p:outputLabel class="lblSubTitulo" value="Rua: Vicente de Paula Lima Nº1886" />
+                            <p:outputLabel class="lblSubTitulo" value="Pastor: Rivaldo de Avila Rocha" />
+                        </h:panelGrid>
+                    </p:card>
+
+                    <p:card >
+
+                        <div >
+                            <p:outputLabel  value="Insira seu nome e senha" class="lblTituloLogin" />
+                        </div>
+
+                        <div align="center" >
+                            <h:panelGrid class="gridLogin" columns="1" cellspacing="15"  >
+                                <p:panelGrid  columns="2" >
+                                    <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                    <p:inputText id="idTxtNomeLogin" value="#{admbSerranaBean.setores.login}"  placeholder="Digite seu nome" />  
+                                </p:panelGrid>
+                                <p:panelGrid columns="2"  >
+                                    <span class="ui-inputgroup-addon"><i class="pi pi-key"></i></span>
+                                    <p:password id="idTxtSenhaLogin" value="#{admbSerranaBean.setores.senhaConfirma}" placeholder="Insira uma senha" />      
+                                </p:panelGrid>
+                            </h:panelGrid>
+
+                            <div class="btnLogar">
+                                <p:commandButton value="Entrar" icon="pi pi-check" action="#{admbSerranaBean.logar()}"  ajax="false" />
+                            </div>
+                            <div class="linkNaoCadastrado" >
+                                <p:commandLink class="lblNaoTemCadastro"  value="Não tem cadastro ?" update="@form" />
+                            </div>
+
+                        </div>
+                    </p:card>
+                </div>
+                <p:panel style="height: 600px" rendered="false" >
+                    <h:panelGrid width="100%" class="gridTituloLogin" columns="1" cellspacing="6" >
+                        <p:outputLabel class="lblAssemblia" value="Assembleia de Deus M. Belém" />
+                        <p:outputLabel class="lblAssemblia" value="(Ribeirão Preto)" />
+                        <p:outputLabel class="lblSubTitulo" value=" SubSede Serrana" />
+                        <p:outputLabel class="lblSubTitulo" value="Rua: Vicente de Paula Lima Nº1886" />
+                        <p:outputLabel class="lblSubTitulo" value="Pastor: Rivaldo de Avila Rocha" />
+                    </h:panelGrid>
+                    <div class="lblTituloLogin" align="center" >
+                        <p:outputLabel  value="Cadastre um nome e senha" />
+                    </div>
+
+                    <h:panelGrid class="gridLogin" columns="1" cellspacing="10"  >
+                        <p:panelGrid  columns="2" >
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <p:inputText id="idTxtNomeCadastro" placeholder="Digite seu nome" />      
+                        </p:panelGrid>
+                        <p:panelGrid  columns="2" >
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <p:inputText id="idTxtApelidoCadastro" placeholder="Login" />      
+                        </p:panelGrid>
+                        <p:panelGrid  columns="2" >
+                            <span class="ui-inputgroup-addon"><i class="pi pi-key"></i></span>
+                            <p:password id="idTxtSenhaCadastro" placeholder="Insira uma senha" 
+                                        feedback="true" inline="true" promptLabel="Nivel" goodLabel="Boa" weakLabel="Fraca" strongLabel="Forte"/>      
+                        </p:panelGrid>
+
+                        <p:panelGrid  columns="2" >
+                            <span class="ui-inputgroup-addon"><i class="pi pi-key"></i></span>
+                            <p:password id="idTxtSenhaConfirmaCadastro"  placeholder="Repita sua senha" />      
+                        </p:panelGrid>
+                        <h:panelGrid style="text-align: center" columns="1" width="100%" cellspacing="10" >
+                            <p:commandButton id="btnSalvarSetor"  update="@form" value="Cadastrar" icon="pi pi-check" />
+                            <p:commandLink class="lblNaoTemCadastro" value="Ja é cadastrado ?"  update="@form" />
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

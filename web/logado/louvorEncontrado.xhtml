@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Adicionar Louvores</title>
+        <h:outputStylesheet library="css" name="responsivo.css"></h:outputStylesheet>
+        <meta name="viewport" content="width=device-width"  />
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div align="center" class="container" >
+                <p:growl id="growl"  life="2000" />
+                <div align="center" class="box" >
+                    <div class="panelNavegacao" >
+                        <p:outputLabel class="lblNomeUsuario"  value="#{admbSerranaBean.setores.usuario}" />
+                    </div> 
+
+                    <h:panelGrid columns="3"  width="80%" class="gridMenuLogado" cellspacing="20"   >
+
+                        <p:commandButton   action="#{admbSerranaBean.exibirEcontrarLouvor()}" icon="pi pi-search" value="Louvor" update="@form" />
+                        <p:commandButton action="#{admbSerranaBean.exibirAdicionarLouvor()}" icon="pi pi-search-plus" update="@form" value="Louvor" />
+                        <p:commandButton action="#{admbSerranaBean.logout()}" update="@form" value="Sair" />
+                    </h:panelGrid>
+                    <p:graphicImage library="imagens" name="logo.png" width="350" height="250"   /> 
+                    <div align="left" >
+                        <h:panelGrid class="gridOuvirHino"  id="idGridPlayer"  cellspacing="15" columns="2"  >
+                            <p:outputLabel class="nomeHinoCantor" value="Louvor:" />
+                            <p:outputLabel value="#{admbSerranaBean.hinos.nomeLouvor}" />                       
+                        </h:panelGrid>
+                    </div>
+                    <h:panelGrid    >
+                        <audio autoplay="autoplay" controls="controls">
+                            <source src="../resources/#{admbSerranaBean.setores.login}/#{admbSerranaBean.hinos.nome}" type="audio/mpeg"></source>
+                            Your browser does not support the <code>audio</code> tag.
+                        </audio>
+
+                    </h:panelGrid>
+
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

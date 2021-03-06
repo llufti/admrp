@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Adicionar Louvores</title>
+        <h:outputStylesheet library="css" name="responsivo.css"></h:outputStylesheet>
+        <meta name="viewport" content="width=device-width"  />
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div align="center" class="container" >
+                <div class="box" >
+                    <p:growl id="growl"  life="2000" />
+                    <div class="panelNavegacao" >
+                        <p:outputLabel class="lblNomeUsuario"  value="#{admbSerranaBean.setores.usuario}" />
+                    </div> 
+
+                    <h:panelGrid columns="3"  width="80%" class="gridMenuLogado" cellspacing="20"   >
+
+                        <p:commandButton   action="#{admbSerranaBean.exibirEcontrarLouvor()}" icon="pi pi-search" value="Louvor" update="@form" />
+                        <p:commandButton action="#{admbSerranaBean.exibirAdicionarLouvor()}" icon="pi pi-search-plus" update="@form" value="Louvor" />
+                        <p:commandButton action="#{admbSerranaBean.logout()}" update="@form" value="Sair" />
+                    </h:panelGrid>
+                    <p:defaultCommand target="idBtnBuscarHinoPeloId" />
+                    <h:panelGrid columns="1" class="idDivLblPesquisarLouvor" cellspacing="15"  >
+                        <p:outputLabel class="lblPesquisarLouvor" value="Pesquisar Louvor"  />
+                        <p:autoComplete  maxResults="30"   style="width: 250px!important" id="event" value="#{admbSerranaBean.hinos}" completeMethod="#{admbSerranaBean.buscarHinosAutoComplete}" var="hinos" 
+                                        itemLabel="#{hinos.numeroHino}#{hinos.nomeLouvor}" itemValue="#{hinos}" forceSelection="true" converter="converterHino"  placeholder="Louvor" >
+                        </p:autoComplete>  
+                        <p:commandButton id="idBtnBuscarHinoPeloId" action="#{admbSerranaBean.buscarHinosPeloIdHino()}" icon="pi pi-search" value="Buscar"  update="@form" />
+                    </h:panelGrid>
+                    <p:dataTable id="idTableHinos" var="hino" value="#{admbSerranaBean.listHinos}"  >
+                        <f:facet class="facetLblTodosLouvores" name="header" >
+                            <div align="center">
+                                <p:commandButton value="Deletar" icon="pi pi-times" action="#{admbSerranaBean.deletarSelecionarLouvou()}" rendered="#{admbSerranaBean.controle}" update="idTableHinos"/>
+                                <p:commandButton value="Selecionar" icon="pi pi-check" action="#{admbSerranaBean.deletarSelecionarLouvou()}" rendered="#{admbSerranaBean.controle == false}" update="idTableHinos"/>
+                            </div>
+                        </f:facet>
+                        <p:column headerText="Nº" width="10%">
+                            <h:outputText value="#{hino.numeroHino}" />
+                        </p:column >
+                        <p:column headerText="Louvor">
+                            <h:outputText value="#{hino.nomeLouvor}" />
+                        </p:column >
+
+                        <p:column headerText="" width="20%" >
+                            <p:commandButton class="btnOuvirHino" icon="pi pi-check" value="" action="#{admbSerranaBean.exibirHinoSelecionado(hino)}" rendered="#{admbSerranaBean.controle}" update="@form" />
+                            <p:commandButton class="btnOuvirHino" icon="pi pi-times" value="" action="#{admbSerranaBean.deletarHino(hino)}" rendered="#{admbSerranaBean.controle == false}" update="@form" />
+                        </p:column>                                           
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
