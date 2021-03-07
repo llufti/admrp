@@ -12,93 +12,75 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:growl id="growl"  life="2000" />
             <p:focus context="idGridPesquisarLouvor" />
+            <p:growl id="growl"  life="2000" />
             <div class="container" align="center" >
-                <div class="box" align="center" >
-                    <div align="center" class="panelNavegacaoDois" >
-                        <p:outputLabel class="lblNomeUsuario"  value="Sonoplasta" />
-                    </div> 
-                    
+                <div align="center" class="panelNavegacaoDois" >
+                    <p:outputLabel class="lblNomeUsuario"  value="Sonoplasta" />
+                </div> 
+                <h:panelGrid columns="2"  width="100%" class="gridMenuLogado" cellspacing="20"   >
+                    <p:commandButton   action="#{admbSerranaBean.exibirBuscarHinosPeloSetor()}" icon="pi pi-search" value="Setor" update="@form" />
+                    <p:commandButton action="#{admbSerranaBean.logout()}" update="@form" value="Sair" />
+                </h:panelGrid>
 
-                    <h:panelGrid columns="2"  width="100%" class="gridMenuLogado" cellspacing="20"   >
-                        <p:commandButton   action="#{admbSerranaBean.exibirBuscarHinosPeloSetor()}" icon="pi pi-search" value="Setor" update="@form" />
-                        <p:commandButton action="#{admbSerranaBean.logout()}" update="@form" value="Sair" />
-                    </h:panelGrid>
 
-                    <p:card id="idSonoplasta" class="panelNavegacao" >
-                        <p:defaultCommand target="idBtnBuscarSetor" />
-                        <h:panelGrid class="gridFiltrarSetor" columns="1"  cellspacing="15" width="100%" rendered="#{admbSerranaBean.renderizacaSono.pesquisarSetor}"  >
-                            <p:outputLabel class="lblPesquisarSetor" value="Pesquisar Setor" rendered="#{admbSerranaBean.renderizacaSono.pesquisarSetor}" />
-                            <p:autoComplete maxResults="30"   value="#{admbSerranaBean.usuarios}" completeMethod="#{admbSerranaBean.buscarSetoresAutoComplete}" var="usuarios" 
-                                            itemLabel="#{usuarios.setor}" itemValue="#{usuarios}" forceSelection="true"  converter="converterSetor"  placeholder="Setor" >
-                            </p:autoComplete>  
-                            <p:commandButton id="idBtnBuscarSetor" action="#{admbSerranaBean.buscarHinosPeloSetorSonoplasta()}" icon="pi pi-search" value="Buscar"  update="@form" />
+                <p:card id="idSonoplasta" class="panelNavegacao" >
+                    <p:defaultCommand target="idBtnBuscarSetor" />
+                    <h:panelGrid class="gridFiltrarSetor" columns="1"  cellspacing="15" width="100%" rendered="#{admbSerranaBean.renderizacaSono.pesquisarSetor}"  >
+                        <p:outputLabel class="lblPesquisarSetor" value="Pesquisar Setor" rendered="#{admbSerranaBean.renderizacaSono.pesquisarSetor}" />
+                        <p:autoComplete maxResults="30"   value="#{admbSerranaBean.usuarios}" completeMethod="#{admbSerranaBean.buscarSetoresAutoComplete}" var="usuarios" 
+                                        itemLabel="#{usuarios.setor}" itemValue="#{usuarios}" forceSelection="true"  converter="converterSetor"  placeholder="Setor" >
+                        </p:autoComplete>  
+                        <p:commandButton id="idBtnBuscarSetor" action="#{admbSerranaBean.buscarHinosPeloSetorSonoplasta()}" icon="pi pi-search" value="Buscar"  update="@form" />
+                    </h:panelGrid> 
+
+
+
+                    <div class="administrador" align="center" >
+                        <p:defaultCommand target="idBtnBuscarHinoPeloId" />
+                        <h:panelGrid id="idGridPesquisarLouvor" cellspacing="15" class="gridFiltrarHino" columns="1"  rendered="#{admbSerranaBean.renderizacaSono.pesquisarHino}"   >
+                            <p:outputLabel class="lblPesquisarSetor" value="Pesquisar Louvor" rendered="#{admbSerranaBean.renderizacaSono.pesquisarHino}" />
+                            <p:inputText id="idCombleteBuscarLouvor"  type="number" value="#{admbSerranaBean.hinos.numeroHino}" />
+                            <p:commandButton id="idBtnBuscarHinoPeloId"  action="#{admbSerranaBean.buscarHinosPeloIdHino()}" icon="pi pi-search" value="Buscar"  update="@form:idSonoplasta" />
                         </h:panelGrid> 
-                        <p:dataTable  var="hino" value="#{admbSerranaBean.listHinos}"  rendered="#{admbSerranaBean.renderizacaSono.pesquisarSetor}" >
-                            <f:facet class="facetLblTodosLouvores" name="header" >
-                                <div align="center" >
-                                    <p:outputLabel value="Todos Os Louvores" />
-                                </div>
-                            </f:facet>
-                            <p:column headerText="Nº" width="12%"  >
-                                <h:outputText value="#{hino.numeroHino}" />
-                            </p:column >
-                            <p:column headerText="Louvor">
-                                <h:outputText value="#{hino.nomeLouvor}" />
-                            </p:column >
+                    </div>
+                    <p:dataTable  var="hino" value="#{admbSerranaBean.listHinos}"  rendered="#{admbSerranaBean.renderizacaSono.pesquisarHino}" >
+                        <f:facet class="facetLblTodosLouvores" name="header" >
+                            <div align="center" >
+                                <p:outputLabel value="Todos Os Louvores" />
+                            </div>
+                        </f:facet>
+                        <p:column headerText="Nº" width="12%"  >
+                            <h:outputText value="#{hino.numeroHino}" />
+                        </p:column >
+                        <p:column headerText="Louvor">
+                            <h:outputText value="#{hino.nomeLouvor}" />
+                        </p:column >
 
-                            <p:column headerText="" width="18%" >
-                                <p:commandButton class="btnOuvirHino" icon="pi pi-check" value="" action="#{admbSerranaBean.exibirHinoSelecionadoSonoplasta(hino)}" update="@form" />
-                            </p:column>                                           
-                        </p:dataTable>
+                        <p:column headerText="" width="18%" >
+                            <p:commandButton class="btnOuvirHino" icon="pi pi-check" value="" action="#{admbSerranaBean.exibirHinoSelecionadoSonoplasta(hino)}" update="@form" />
+                        </p:column>                                           
+                    </p:dataTable>
+                    <p:graphicImage library="imagens" class="imgLovorSonoplasta" name="logo.png" width="300" height="250" rendered="#{admbSerranaBean.renderizacaSono.playerHino}" />
 
+                    <div align="center" >
+                        <h:panelGrid class="gridOuvirHino"  id="idGridPlayer"  cellspacing="15" columns="2" rendered="#{admbSerranaBean.renderizacaSono.playerHino}" >
+                            <p:outputLabel class="nomeHinoCantor" value="Louvor:" />
+                            <p:outputLabel value="#{admbSerranaBean.hinos.nomeLouvor}" />
 
-                        <div class="administrador" align="center" >
-                            <p:defaultCommand target="idBtnBuscarHinoPeloId" />
-                            <h:panelGrid id="idGridPesquisarLouvor" cellspacing="15" class="gridFiltrarHino" columns="1"  rendered="#{admbSerranaBean.renderizacaSono.pesquisarHino}"   >
-                                <p:outputLabel class="lblPesquisarSetor" value="Pesquisar Louvor" rendered="#{admbSerranaBean.renderizacaSono.pesquisarHino}" />
-                                <p:inputText id="idCombleteBuscarLouvor"  type="number" value="#{admbSerranaBean.hinos.numeroHino}" />
-                                <p:commandButton id="idBtnBuscarHinoPeloId"  action="#{admbSerranaBean.buscarHinosPeloIdHino()}" icon="pi pi-search" value="Buscar"  update="@form:idSonoplasta" />
-                            </h:panelGrid> 
-                        </div>
-                        <p:dataTable  var="hino" value="#{admbSerranaBean.listHinos}"  rendered="#{admbSerranaBean.renderizacaSono.pesquisarHino}" >
-                            <f:facet class="facetLblTodosLouvores" name="header" >
-                                <div align="center" >
-                                    <p:outputLabel value="Todos Os Louvores" />
-                                </div>
-                            </f:facet>
-                            <p:column headerText="Nº" width="12%"  >
-                                <h:outputText value="#{hino.numeroHino}" />
-                            </p:column >
-                            <p:column headerText="Louvor">
-                                <h:outputText value="#{hino.nomeLouvor}" />
-                            </p:column >
+                        </h:panelGrid>
+                        <h:panelGrid    rendered="#{admbSerranaBean.renderizacaSono.playerHino}" >
+                            <audio  controls="controls"  >
+                                <source   src="resources/#{admbSerranaBean.hinos.loginSonoplasta}/#{admbSerranaBean.hinos.nome}" type="audio/mpeg"></source>
+                                Your browser does not support the <code>audio</code> tag.
+                            </audio>
+                        </h:panelGrid>
+                    </div>
 
-                            <p:column headerText="" width="18%" >
-                                <p:commandButton class="btnOuvirHino" icon="pi pi-check" value="" action="#{admbSerranaBean.exibirHinoSelecionadoSonoplasta(hino)}" update="@form" />
-                            </p:column>                                           
-                        </p:dataTable>
-                        <p:graphicImage library="imagens" class="imgLovorSonoplasta" name="logo.png" width="300" height="250" rendered="#{admbSerranaBean.renderizacaSono.playerHino}" />
-
-                        <div align="center" >
-                            <h:panelGrid class="gridOuvirHino"  id="idGridPlayer"  cellspacing="15" columns="2" rendered="#{admbSerranaBean.renderizacaSono.playerHino}" >
-                                <p:outputLabel class="nomeHinoCantor" value="Louvor:" />
-                                <p:outputLabel value="#{admbSerranaBean.hinos.nomeLouvor}" />
-
-                            </h:panelGrid>
-                            <h:panelGrid    rendered="#{admbSerranaBean.renderizacaSono.playerHino}" >
-                                <audio  controls="controls"  >
-                                    <source   src="resources/#{admbSerranaBean.hinos.loginSonoplasta}/#{admbSerranaBean.hinos.nome}" type="audio/mpeg"></source>
-                                    Your browser does not support the <code>audio</code> tag.
-                                </audio>
-                            </h:panelGrid>
-                        </div>
-
-                        <p:commandButton value="Voltar" update="@form" action="#{admbSerranaBean.buscarHinosPeloSetorSonoplasta()}" rendered="#{admbSerranaBean.renderizacaSono.playerHino}" />
-                    </p:card>
-                </div>
+                    <p:commandButton value="Voltar" update="@form" action="#{admbSerranaBean.buscarHinosPeloSetorSonoplasta()}" rendered="#{admbSerranaBean.renderizacaSono.playerHino}" />
+                </p:card>
             </div>
+
         </h:form>
     </h:body>
 </html>

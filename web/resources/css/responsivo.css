@@ -11,10 +11,9 @@
 
 .container {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center
+    margin-left: auto;
+    margin-right:  auto;
+    padding: 0px;
 
 }
 
@@ -26,19 +25,18 @@
     .panelNavegacao{
         padding: 3%!important;
         border-color:#336cd6; 
-        margin-top: 3%;
-        border-radius: 20px 20px 20px 20px;
+
         text-align: center!important;
         background-color: #336cd6;
         width: 100%!important;
     }
     .panelNavegacaoDois{
-        margin-top: 3%!important;
-        border-radius: 20px 20px 20px 20px;
+
         text-align: center!important;
         background-color: #336cd6;
         padding: 3%;
         font-size: 120%!important;
+        width: 100%!important;
     }
     .gridSonoplastaBuscarSetor{
         text-align: center!important;
@@ -116,6 +114,7 @@
     }
     .gridTituloLogin{        
         text-align: center!important;
+        margin-top: -3%;
     }
     .lblAssemblia{
         font-size: 120%!important;
@@ -167,6 +166,7 @@
         font-size: 150%!important;
         font-weight: bold!important;
         margin-bottom:  3%!important;
+        margin-top: -10%;
 
     }
     .btnLogar{
@@ -224,7 +224,7 @@
 
 
 }
-/*@media 
+@media 
 (min-width: 800px){
     .imgLovorSonoplasta{
         width: 500px;
@@ -386,11 +386,11 @@
     }
     .ui-fileupload-buttonbar{
         border: none!important;
-        background-color: black!important;   
+        background-color: white!important;   
 
     }   
     .ui-fileupload-choose{        
-        font-size: 80%!important;
+        font-size: 100%!important;
         width: 120%!important;     
     }
     .ui-fileupload-content{
@@ -411,7 +411,7 @@
         margin: 0 auto;
 
     }
-}*/
+}
 
 
 

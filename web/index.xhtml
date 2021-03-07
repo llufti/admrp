@@ -15,7 +15,7 @@
             <div  class="container"  >
                 <div align="center" class="box">
                     <p:growl id="growl"  life="2000" />
-                    <p:card  >
+                    <p:card   >
                         <h:panelGrid width="100%" class="gridTituloLogin" columns="1"  >
                             <p:outputLabel class="lblAssemblia" value="Assembleia de Deus M. Belém" />
                             <p:outputLabel class="lblAssemblia" value="(Ribeirão Preto)" />
@@ -25,7 +25,7 @@
                         </h:panelGrid>
                     </p:card>
 
-                    <p:card >
+                    <p:card rendered="#{admbSerranaBean.renderizacao.cadastrar == false}" >
 
                         <div >
                             <p:outputLabel  value="Insira seu nome e senha" class="lblTituloLogin" />
@@ -47,50 +47,44 @@
                                 <p:commandButton value="Entrar" icon="pi pi-check" action="#{admbSerranaBean.logar()}"  ajax="false" />
                             </div>
                             <div class="linkNaoCadastrado" >
-                                <p:commandLink class="lblNaoTemCadastro"  value="Não tem cadastro ?" update="@form" />
+                                <p:commandLink class="lblNaoTemCadastro"  value="Não tem cadastro ?" action="#{admbSerranaBean.renderizacao.mudarParaCadastrarNoSite()}" update="@form" />
                             </div>
 
                         </div>
                     </p:card>
                 </div>
-                <p:panel style="height: 600px" rendered="false" >
-                    <h:panelGrid width="100%" class="gridTituloLogin" columns="1" cellspacing="6" >
-                        <p:outputLabel class="lblAssemblia" value="Assembleia de Deus M. Belém" />
-                        <p:outputLabel class="lblAssemblia" value="(Ribeirão Preto)" />
-                        <p:outputLabel class="lblSubTitulo" value=" SubSede Serrana" />
-                        <p:outputLabel class="lblSubTitulo" value="Rua: Vicente de Paula Lima Nº1886" />
-                        <p:outputLabel class="lblSubTitulo" value="Pastor: Rivaldo de Avila Rocha" />
-                    </h:panelGrid>
+                <p:card rendered="#{admbSerranaBean.renderizacao.cadastrar}">
+                   
                     <div class="lblTituloLogin" align="center" >
                         <p:outputLabel  value="Cadastre um nome e senha" />
                     </div>
 
-                    <h:panelGrid class="gridLogin" columns="1" cellspacing="10"  >
+                   <h:panelGrid class="gridTituloLogin" columns="1" cellspacing="10"  >
                         <p:panelGrid  columns="2" >
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                            <p:inputText id="idTxtNomeCadastro" placeholder="Digite seu nome" />      
+                            <p:inputText id="idTxtNomeCadastro" value="#{admbSerranaBean.setores.setor}" placeholder="Digite seu nome" />      
                         </p:panelGrid>
                         <p:panelGrid  columns="2" >
                             <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
-                            <p:inputText id="idTxtApelidoCadastro" placeholder="Login" />      
+                            <p:inputText id="idTxtApelidoCadastro" value="#{admbSerranaBean.setores.login}" placeholder="Login" />      
                         </p:panelGrid>
                         <p:panelGrid  columns="2" >
                             <span class="ui-inputgroup-addon"><i class="pi pi-key"></i></span>
-                            <p:password id="idTxtSenhaCadastro" placeholder="Insira uma senha" 
+                            <p:password id="idTxtSenhaCadastro" value="#{admbSerranaBean.setores.senha}" placeholder="Insira uma senha" 
                                         feedback="true" inline="true" promptLabel="Nivel" goodLabel="Boa" weakLabel="Fraca" strongLabel="Forte"/>      
                         </p:panelGrid>
-
+                        
                         <p:panelGrid  columns="2" >
                             <span class="ui-inputgroup-addon"><i class="pi pi-key"></i></span>
-                            <p:password id="idTxtSenhaConfirmaCadastro"  placeholder="Repita sua senha" />      
+                            <p:password id="idTxtSenhaConfirmaCadastro" value="#{admbSerranaBean.setores.senhaConfirma}" placeholder="Repita sua senha" />      
                         </p:panelGrid>
                         <h:panelGrid style="text-align: center" columns="1" width="100%" cellspacing="10" >
-                            <p:commandButton id="btnSalvarSetor"  update="@form" value="Cadastrar" icon="pi pi-check" />
-                            <p:commandLink class="lblNaoTemCadastro" value="Ja é cadastrado ?"  update="@form" />
+                            <p:commandButton id="btnSalvarSetor" action="#{admbSerranaBean.salvarSetor()}" update="@form" value="Cadastrar" icon="pi pi-check" />
+                            <p:commandLink class="lblNaoTemCadastro" value="Ja é cadastrado ?" action="#{admbSerranaBean.renderizacao.mudarParaLogarSistema()}" update="@form" />
                         </h:panelGrid>
                     </h:panelGrid>
 
-                </p:panel>
+                </p:card>
             </div>
         </h:form>
     </h:body>

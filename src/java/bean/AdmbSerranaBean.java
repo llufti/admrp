@@ -68,6 +68,39 @@ public class AdmbSerranaBean implements Serializable {
         renderizacaSono = new RenderizacaoSono();
         usuarios = new Usuarios();
     }
+    //------------------------------logar Cadastrar------------------
+
+    public void exibirTelaLogin() {
+        hinos = new Hinos();
+        setores = new Setores();
+        renderizacao.mudarParaLogarNoSite();
+        renderizacao.ocultarGridUploadHino();
+
+    }
+
+    public void exibirTelaCadastrar() {
+        setores = new Setores();
+        hinos = new Hinos();
+        renderizacao.mudarParaCadastrarNoSite();
+    }
+
+    public void salvarSetor() throws ErroSistema {
+        if (!setores.getSetor().equals("") && !setores.getLogin().equals("")) {
+            if (setores.getSenha().equals(setores.getSenhaConfirma()) && !setores.getSenha().equals("") && !setores.getSenhaConfirma().equals("")) {
+                setorDao.salvarSetor(hinos, fileUploadView, setores);
+                setores = new Setores();
+                renderizacao.mudarParaLogarNoSite();
+                adicionarMensagem("Salvo com sucesso!", FacesMessage.SEVERITY_INFO);
+                
+            } else {
+                adicionarMensagem("Senhas diferentes!", FacesMessage.SEVERITY_ERROR);
+                adicionarMensagem("Dados não insiridos!", FacesMessage.SEVERITY_ERROR);
+            }
+
+        } else {
+            adicionarMensagem("Insira dados em todos campos!", FacesMessage.SEVERITY_ERROR);
+        }
+    }
 
     //----------------Sonoplasta-------------------------------
     public void exibirBuscarHinosPeloSetor() throws ErroSistema {
@@ -95,7 +128,7 @@ public class AdmbSerranaBean implements Serializable {
             adicionarMensagem("Hinos não encontrado!", FacesMessage.SEVERITY_ERROR);
         }
     }
-    
+
     public void exibirHinoSelecionadoSonoplasta(Hinos hinos) {
         this.hinos = hinos;
         setores.setUsuario("Sonoplasta Louvando");

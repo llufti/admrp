@@ -67,6 +67,9 @@ public class Renderizacao {
     public void mudarParaCadastrarNoSite() {
         linhaUm = "cadastrarSite";
     }
+    public void mudarParaOcultarCadastro() {
+        linhaUm = "";
+    }
 
     public boolean isGridUplodHino() {
         return "uploadGrid".equals(linhaUm);
